@@ -1,0 +1,24 @@
+version: "3.9"
+
+services:
+  server:
+    build: ./server
+    environment:
+      - DB_ENDPOINT=${DB_ENDPOINT}
+      - SECRET=supersecret
+      - SUBDOMAIN=lunar-dream-13
+      - PORT=3000
+    ports:
+      - 3000:3000
+  backup:
+    build: ./backup
+    environment:
+      - DB_ENDPOINT=${DB_ENDPOINT}
+      - DATA_DIR=/backup
+      - DELAY=60
+      - LIMIT=10
+    volumes:
+      - backup_data:/backup
+
+volumes:
+  backup_data: {}
