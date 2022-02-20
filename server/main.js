@@ -83,7 +83,9 @@ app.post('/', async (req, res) => {
                         upsert: true
                     }
                 }));
-                await collection.bulkWrite(tags);
+                if (tags.length > 0) {
+                    await collection.bulkWrite(tags);
+                }
             } catch (e) {
                 console.log(e);
             }

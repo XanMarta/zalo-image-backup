@@ -4,6 +4,6 @@ fi
 
 while :
 do
-    rclone --config /data/rclone.conf move /backup BACKUP: -v --ignore-existing
     sleep $DELAY
+    rclone --config /data/rclone.conf move /backup BACKUP: -v --ignore-existing
 done
