@@ -1,6 +1,7 @@
 version: "3.9"
 
 services:
+
   server:
     build: ./server
     environment:
@@ -10,6 +11,7 @@ services:
       - PORT=3000
     ports:
       - 3000:3000
+
   backup:
     build: ./backup
     environment:
@@ -20,5 +22,21 @@ services:
     volumes:
       - backup_data:/backup
 
+  rclone:
+    build: ./rclone
+    volumes:
+      - backup_data:/backup
+    environment:
+      - DELAY=1000
+
+  firefox:
+    build: ./firefox
+    ports:
+      - 5800:5800
+    volumes:
+      - firefox_data:/config:rw
+    shm_size: '2gb'
+
 volumes:
   backup_data: {}
+  firefox_data: {}
